@@ -5,6 +5,7 @@ package com.psply.mypackage.utils.network.okhttp;
  */
 public class OKHttpManager {
 
+
     private static class OKHttpManagerHolder {
         private static final OKHttpManager INSTANCE = new OKHttpManager();
     }
