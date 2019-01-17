@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="videoview_width">540dp</dimen>
+    <dimen name="videoview_height">240dp</dimen>
+    <dimen name="videoview_bottom_bar_width">540dp</dimen>
+    <dimen name="videoview_bottom_bar_height">50dp</dimen>
+    <dimen name="video_progress_bar_width">540dp</dimen>
+    <dimen name="video_progress_bar_height">5dp</dimen>
+    <dimen name="videoview_actions_width">5dp</dimen>
+    <dimen name="videoview_actions_height">5dp</dimen>
+</resources>
