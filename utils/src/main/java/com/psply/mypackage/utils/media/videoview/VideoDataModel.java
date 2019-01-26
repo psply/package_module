@@ -7,6 +7,11 @@ package com.psply.mypackage.utils.media.videoview;
  */
 public class VideoDataModel {
 
+    public enum VideoSource {
+        ONLINE,
+        OFFLINE
+    }
+
     private String mVideoUrl;
 
     private String mVideoLocalUri;
@@ -14,6 +19,8 @@ public class VideoDataModel {
     private String mVideoSize;
 
     private long mVideoTotalTime;
+
+    private VideoSource mVideoSource;
 
     public String getVideoUrl() {
         return mVideoUrl;
@@ -45,5 +52,13 @@ public class VideoDataModel {
 
     public void setVideoTotalTime(long mVideoTotalTime) {
         this.mVideoTotalTime = mVideoTotalTime;
+    }
+
+    public VideoSource getVideoSource() {
+        return mVideoSource;
+    }
+
+    public void setVideoSource(VideoSource videoSource) {
+        this.mVideoSource = videoSource;
     }
 }

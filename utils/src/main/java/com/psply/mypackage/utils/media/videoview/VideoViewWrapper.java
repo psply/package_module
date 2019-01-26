@@ -32,6 +32,8 @@ public class VideoViewWrapper {
 
     private final int UI_UPDATE = 0x01;
 
+    private boolean mVideoPrepared = false;
+
     private Context mContext;
 
     private Handler mHandler;
@@ -55,6 +57,10 @@ public class VideoViewWrapper {
     private TextView mVideoCurrentTimeView;
 
     private ImageView mLoadingView;
+
+    private ImageView mDefaultBackgroundView;
+
+    private ImageView mDefaultStopView;
 
     private AudioManager mAudioManager;
 
@@ -116,15 +122,45 @@ public class VideoViewWrapper {
         mVideoCurrentTimeView = mVideoViewLayout.findViewById(R.id.video_time);
         mVideoTotalTimeView = mVideoViewLayout.findViewById(R.id.video_total_time);
         mLoadingView = mVideoViewLayout.findViewById(R.id.loading_view);
+        mDefaultBackgroundView = mVideoViewLayout.findViewById(R.id.default_background_image);
+        mDefaultStopView = mVideoViewLayout.findViewById(R.id.default_stop_image);
 
         mVideoViewContainer.addView(mVideoViewLayout);
 
+        initDefaultStopView();
         initVideoProgress();
         initVideoAction();
         initVideoVolume();
         initFullScreen();
         initCustomVideoListener();
 
+    }
+
+    /**
+     * 默认图片点击
+     */
+    private void initDefaultStopView() {
+        mDefaultStopView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mCustomVideoView == null || mVideoDataModel == null) {
+                    return;
+                }
+                mDefaultStopView.setVisibility(View.GONE);
+
+                if (mVideoPrepared) {
+                    startPlay();
+                    mVideoActionView.setImageResource(R.drawable.icon_video_start);
+                    return;
+                }
+
+                if (mVideoDataModel.getVideoSource() == VideoDataModel.VideoSource.OFFLINE) {
+                    loadFromOffline();
+                } else if (mVideoDataModel.getVideoSource() == VideoDataModel.VideoSource.ONLINE) {
+                    loadFromOnline();
+                }
+            }
+        });
     }
 
     /**
@@ -153,6 +189,8 @@ public class VideoViewWrapper {
         mCustomVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
+                mVideoPrepared = true;
+                mDefaultBackgroundView.setVisibility(View.GONE);
                 if (mLoadingView != null) {
                     mRotateAnimator.cancel();
                     mLoadingView.setVisibility(View.GONE);
@@ -212,12 +250,29 @@ public class VideoViewWrapper {
         mVideoActionView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (!mVideoPrepared) {
+                    if (mCustomVideoView == null || mVideoDataModel == null) {
+                        return;
+                    }
+                    mDefaultStopView.setVisibility(View.GONE);
+                    if (mVideoDataModel.getVideoSource() == VideoDataModel.VideoSource.OFFLINE) {
+                        loadFromOffline();
+                    } else if (mVideoDataModel.getVideoSource() == VideoDataModel.VideoSource.ONLINE) {
+                        loadFromOnline();
+                    }
+                    mVideoActionView.setImageResource(R.drawable.icon_video_start);
+                    return;
+                }
+
                 if (mCustomVideoView.isPlaying()) {
                     mVideoActionView.setImageResource(R.drawable.icon_video_stop);
+                    mDefaultStopView.setVisibility(View.VISIBLE);
                     mCustomVideoView.pause();
                     mHandler.removeMessages(UI_UPDATE);
                 } else {
                     mVideoActionView.setImageResource(R.drawable.icon_video_start);
+                    mDefaultStopView.setVisibility(View.GONE);
                     mCustomVideoView.start();
                     mHandler.sendEmptyMessageDelayed(UI_UPDATE,500);
                 }
@@ -365,6 +420,10 @@ public class VideoViewWrapper {
         }
         mCustomVideoView.setVideoPath(mVideoDataModel.getVideoLocalUri());
         mCustomVideoView.start();
+        if (mLoadingView != null) {
+            mLoadingView.setVisibility(View.VISIBLE);
+            palyLoadAnimation();
+        }
 
     }
 

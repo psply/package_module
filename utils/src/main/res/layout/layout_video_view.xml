@@ -10,6 +10,19 @@
     </com.psply.mypackage.utils.media.videoview.CustomVideoView>
 
     <ImageView
+            android:id="@+id/default_background_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black"/>
+
+    <ImageView
+            android:id="@+id/default_stop_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/icon_video_stop"/>
+
+    <ImageView
             android:id="@+id/loading_view"
             android:layout_width="40dp"
             android:layout_height="40dp"

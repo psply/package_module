@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MyPackage</string>
+
+    <string name="my_fruit_tree">我的果树</string>
+    <string name="my_attention_friend">我关注的果友</string>
+    <string name="my_gift_card">我的礼品卡</string>
+    <string name="recommend_gift">推荐有礼</string>
 </resources>

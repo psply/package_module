@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="200dp">
+
+    <ImageView
+            android:id="@+id/user_icon"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/icon_loading"/>
+
+    <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_icon"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="小橙子"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+    <ImageView
+            android:id="@+id/fruit_coin_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_alignTop="@id/user_icon"
+            android:src="@drawable/icon_loading"/>
+
+    <TextView
+            android:id="@+id/fruit_coin_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fruit_coin_icon"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:text="水果币"/>
+
+
+</RelativeLayout>

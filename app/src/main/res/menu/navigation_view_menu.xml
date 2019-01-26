@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/my_fruit_tree"
+        android:icon="@drawable/icon_loading"
+        android:title="@string/my_fruit_tree"/>
+
+    <item
+        android:id="@+id/my_attention_friend"
+        android:icon="@drawable/icon_loading"
+        android:title="@string/my_attention_friend"/>
+
+    <item
+        android:id="@+id/my_gift_card"
+        android:icon="@drawable/icon_loading"
+        android:title="@string/my_gift_card"/>
+
+    <item
+        android:id="@+id/recommend_gift"
+        android:icon="@drawable/icon_loading"
+        android:title="@string/recommend_gift"/>
+
+</menu>
